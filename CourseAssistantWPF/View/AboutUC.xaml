@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="CourseAssistantWPF.View.AboutUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{StaticResource MaterialDesignBody}"
+             mc:Ignorable="d" d:DesignHeight="670" d:DesignWidth="1024">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <StackPanel Background="{StaticResource PrimaryColorBrush}" TextElement.Foreground="White" 
+                VerticalAlignment="Top">
+      <md:TransitioningContent OpeningEffect="{md:TransitionEffect SlideInFromRight, Duration=0:0:1}">
+        <TextBlock Text="关于作者" Margin="24 16 0 24" Style="{StaticResource MaterialDesignDisplay1TextBlock}" />
+      </md:TransitioningContent>
+    </StackPanel>
+
+    <md:TransitioningContent OpeningEffect="{md:TransitionEffect FadeIn, Duration=0:0:1}"
+                             VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
+      <md:Card Width="480" Padding="8" md:ShadowAssist.ShadowDepth="Depth4">
+        <StackPanel>
+          <Image Source="/CourseAssistantWPF;component/authorAvat.png" Height="128" Width="128" HorizontalAlignment="Center" 
+                 Margin="0 8 0 16" Stretch="UniformToFill" />
+          <TextBlock Text="HanF Kuo" FontSize="18" FontFamily="Segou UI" FontWeight="DemiBold" HorizontalAlignment="Center" />
+          <StackPanel Margin="0 16 0 0" HorizontalAlignment="Center">
+            <StackPanel Margin="0 8" Orientation="Horizontal" HorizontalAlignment="Center">
+              <md:PackIcon Kind="Briefcase" Width="28" Height="28" />
+              <TextBlock Text="UNDERGRADUATE" TextAlignment="Center" FontSize="13" Margin="16 8 0 8" Width="120" />
+            </StackPanel>
+            <StackPanel Margin="0 8" Orientation="Horizontal" HorizontalAlignment="Center">
+              <md:PackIcon Kind="MapMarker" Width="28" Height="28" />
+              <TextBlock Text="JXUFE" TextAlignment="Center" FontSize="13" Margin="16 8 0 8" Width="120" />
+            </StackPanel>
+          </StackPanel>
+          <StackPanel Margin="0 16" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel.Resources>
+              <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                <Setter Property="Width" Value="40" />
+                <Setter Property="Height" Value="40" />
+                <Setter Property="Margin" Value="16 0" />
+              </Style>
+            </StackPanel.Resources>
+            <Button ToolTip="1098335635" x:Name="BtnQqchat" Click="BtnQqchat_Click"
+                    Background="{StaticResource PrimaryColorBrush}"
+                    BorderBrush="{StaticResource PrimaryColorBrush}">
+              <md:PackIcon Kind="Qqchat" />
+            </Button>
+            <Button ToolTip="Kuuo" x:Name="BtnGithub" Click="BtnGithub_Click"
+                    Background="{StaticResource githubColorBrush}"
+                    BorderBrush="{StaticResource githubColorBrush}">
+              <md:PackIcon Kind="GithubCircle" />
+            </Button>
+            <Button ToolTip="mailto:hfkuuo@outlook.com" x:Name="BtnEmail" Click="BtnEmail_Click"
+                    Background="{StaticResource emailColorBrush}"
+                    BorderBrush="{StaticResource emailColorBrush}">
+              <md:PackIcon Kind="Email" />
+            </Button>
+            <Button ToolTip="kuuo.github.io" x:Name="BtnBlog" Click="BtnBlog_Click"
+                    Background="{StaticResource blogColorBrush}"
+                    BorderBrush="{StaticResource blogColorBrush}">
+              <md:PackIcon Kind="Blogger" />
+            </Button>
+          </StackPanel>
+        </StackPanel>
+      </md:Card>
+    </md:TransitioningContent>
+  </Grid>
+</UserControl>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="46bfecc6f77a4a0a88bddf965726ab0b" Name="Diagram1">
+        <EntityTypeShape EntityType="CourseInfoDBModel.Chairman" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseInfoDBModel.HWGroup" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseInfoDBModel.Registration" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseInfoDBModel.Rejoinder" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CourseInfoDBModel.Student" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="CourseInfoDBModel.FK_Chairman_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="CourseInfoDBModel.FK_HWGroup_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="CourseInfoDBModel.FK_Registration_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="CourseInfoDBModel.FK_Rejoinder_Student" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

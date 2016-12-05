@@ -1,0 +1,164 @@
+﻿<UserControl x:Class="CourseAssistantWPF.View.RejoinderInfoUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CourseAssistantWPF.View"
+             xmlns:localvm="clr-namespace:CourseAssistantWPF.ViewModel"
+             xmlns:localu="clr-namespace:CourseAssistantWPF.Utils"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" d:DesignHeight="670" d:DesignWidth="1024">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="1*" />
+      <RowDefinition Height="5*" />
+    </Grid.RowDefinitions>
+
+    <Grid Background="{StaticResource PrimaryColorBrush}" TextElement.Foreground="White">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition />
+      </Grid.RowDefinitions>
+
+      <md:TransitioningContent OpeningEffect="{md:TransitionEffect SlideInFromRight, Duration=0:0:1}">
+        <StackPanel>
+          <TextBlock Text="答辩信息" Margin="24 16 0 0" Style="{StaticResource MaterialDesignDisplay1TextBlock}" />
+        </StackPanel>
+      </md:TransitioningContent>
+
+      <DockPanel Grid.Row="1" VerticalAlignment="Bottom" Margin="36 0 36 -28">
+        <md:TransitioningContent OpeningEffect="{md:TransitionEffect SlideInFromLeft, Duration=0:0:1}" DockPanel.Dock="Left">
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                    ToolTip="导入评委信息" Click="BtnImportJudeg_Click" Margin="16 0">
+              <md:PackIcon Kind="Import"/>
+            </Button>
+            <TextBlock Style="{StaticResource FadeInOutTextBlock}" x:Name="greenPromptTB"
+                       VerticalAlignment="Bottom" Margin="48 0 0 -6" />
+          </StackPanel>
+        </md:TransitioningContent>
+
+        <md:TransitioningContent OpeningEffect="{md:TransitionEffect SlideInFromRight, Duration=0:0:1}" DockPanel.Dock="Right">
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Style="{StaticResource MaterialDesignFloatingActionAccentButton}" 
+                    ToolTip="保存" Click="BtnSave_Click" Margin="16 0">
+              <md:PackIcon Kind="ContentSave" Height="24" Width="24" />
+            </Button>
+          </StackPanel>
+        </md:TransitioningContent>
+      </DockPanel>
+    </Grid>
+
+    <Grid Grid.Row="1" >
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="2*" />
+        <ColumnDefinition Width="1*" />
+      </Grid.ColumnDefinitions>
+
+      <md:TransitioningContent OpeningEffect="{md:TransitionEffect SlideInFromLeft, Duration=0:0:1}">
+        <md:Card Margin="8 24 8 8">
+          <DockPanel>
+            <DockPanel Margin="16" DockPanel.Dock="Top">
+              <TextBlock Foreground="{StaticResource MaterialDesignBody}" Text="评委列表" VerticalAlignment="Center"
+                       Style="{StaticResource MaterialDesignTitleTextBlock}" DockPanel.Dock="Left" />
+              <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <md:PopupBox ToolTip="生成评委" PlacementMode="LeftAndAlignBottomEdges" StaysOpen="True"
+                             Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}" 
+                             PopupMode="Click" Width="40" Height="40">
+                  <md:Card Margin="2">
+                    <StackPanel Width="300" Margin="16">
+                      <TextBlock Margin="0 8 0 0" Style="{StaticResource MaterialDesignTitleTextBlock}">
+                        <Run Text="生成评委数量：" />
+                        <Run x:Name="tbnoj" />
+                      </TextBlock>
+                      <Slider Minimum="1" Maximum="7" TickFrequency="1" Margin="0 16"
+                              Value="3" x:Name="NumberOfJ" ValueChanged="NumberOfJ_ValueChanged" />
+                      <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                              ToolTip="生成" Click="BtnGenerateJudge_Click" Margin="0 0 0 8">
+                        <md:PackIcon Kind="Plus" />
+                      </Button>
+                      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 8">
+                        <TextBlock Text="为" FontSize="14px" VerticalAlignment="Center" />
+                        <ComboBox x:Name="cbFor" SelectedIndex="0" FontSize="14px" Margin="8 0">
+                          <ComboBoxItem>所有人</ComboBoxItem>
+                          <ComboBoxItem>组长</ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock Text="生成" FontSize="14px" VerticalAlignment="Center" />
+                      </StackPanel>
+                    </StackPanel>
+                  </md:Card>
+                </md:PopupBox>
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                        ToolTip="导出评委信息" Click="BtnExportJudeg_Click" Margin="16 0">
+                  <md:PackIcon Kind="Export"/>
+                </Button>
+              </StackPanel>
+            </DockPanel>
+            <ScrollViewer Padding="24 0 24 16" DockPanel.Dock="Bottom">
+              <DataGrid CanUserSortColumns="True" CanUserAddRows="False" x:Name="datagrid1" ColumnWidth="1*"
+                        CanUserResizeColumns="False">
+                <DataGrid.DataContext>
+                  <localvm:JudgeListViewModel />
+                </DataGrid.DataContext>
+              </DataGrid>
+            </ScrollViewer>
+          </DockPanel>
+        </md:Card>
+      </md:TransitioningContent>
+
+      <md:TransitioningContent Grid.Column="1" OpeningEffect="{md:TransitionEffect SlideInFromRight, Duration=0:0:1}">
+        <md:Card Margin="0 24 8 8">
+          <DockPanel Margin="16">
+            <DockPanel DockPanel.Dock="Top">
+              <TextBlock Foreground="{StaticResource MaterialDesignBody}" Text="主席列表" VerticalAlignment="Center"
+                         Style="{StaticResource MaterialDesignTitleTextBlock}" DockPanel.Dock="Left" />
+              <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <md:PopupBox ToolTip="生成主席" PlacementMode="LeftAndAlignBottomEdges" StaysOpen="True"
+                             Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}" 
+                             PopupMode="Click" Width="40" Height="40">
+                  <md:Card Margin="2">
+                    <StackPanel Width="300" Margin="16">
+                      <TextBlock Margin="0 8 0 0" Style="{StaticResource MaterialDesignTitleTextBlock}">
+                        <Run Text="生成主席数量：" />
+                        <Run x:Name="tbnoc" />
+                      </TextBlock>
+                      <Slider Minimum="1" Maximum="5" TickFrequency="1" Margin="0 16" 
+                              Value="2" x:Name="NumberOfC" ValueChanged="NumberOfC_ValueChanged" />
+                      <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                              ToolTip="生成" Click="BtnGenerateChairman_Click" Margin="0 0 0 8">
+                        <md:PackIcon Kind="Plus" />
+                      </Button>
+                      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 8">
+                        <TextBlock Text="从" FontSize="14px" VerticalAlignment="Center" />
+                        <ComboBox x:Name="cbCFor" SelectedIndex="0" FontSize="14px" Margin="8 0">
+                          <ComboBoxItem>所有人</ComboBoxItem>
+                          <ComboBoxItem>组长</ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock Text="生成" FontSize="14px" VerticalAlignment="Center" />
+                      </StackPanel>
+                    </StackPanel>
+                  </md:Card>
+                </md:PopupBox>
+                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                        ToolTip="导出主席信息" Click="BtnExportChairman_Click" Margin="16 0">
+                  <md:PackIcon Kind="Export"/>
+                </Button>
+              </StackPanel>
+            </DockPanel>
+
+            <DockPanel Margin="0 16" DockPanel.Dock="Bottom">
+              <DataGrid CanUserSortColumns="True" CanUserAddRows="False" x:Name="datagrid2" ColumnWidth="1*"
+                        CanUserResizeColumns="False" DockPanel.Dock="Bottom">
+                <DataGrid.DataContext>
+                  <localvm:ChairmanListViewModel />
+                </DataGrid.DataContext>
+              </DataGrid>
+            </DockPanel>
+
+          </DockPanel>
+        </md:Card>
+      </md:TransitioningContent>
+
+    </Grid>
+  </Grid>
+</UserControl>
